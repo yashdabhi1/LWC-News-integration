@@ -1,0 +1,50 @@
+<template>
+    <lightning-card title="World Trade News" icon-name="action:google_news">
+        <div class="filter-container slds-p-around_small">
+            <lightning-combobox
+                name="category"
+                label="Select Category"
+                value={category}
+                placeholder="Select Category"
+                options={categoryOptions}
+                onchange={handleCategoryChange}>
+            </lightning-combobox>
+            <lightning-combobox
+                name="country"
+                label="Country"
+                placeholder="Select Country"
+                value={country}
+                options={countryOptions}
+                onchange={handleCountryChange}>
+            </lightning-combobox>
+        </div>
+        <template if:true={news}>
+            <div class="news-container slds-p-around_small">
+                <template for:each={news} for:item="article">
+                    <div key={article.url} class="news-item slds-m-around_small">
+                        <lightning-layout multiple-rows="true">
+                            <lightning-layout-item size="1">
+                                <div class="image slds-p-right_small">
+                                    <img src={article.imageUrl} alt="News Image" class="news-image" />  
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="11">
+                                <div class="custom-box">
+                                    <div class="news-content">
+                                        <p class="news-source">News Source: {article.sourceName}</p>
+                                        <p class="news-title">{article.title}</p>
+                                        <p class="news-description">{article.description}</p>
+                                        <a href={article.url} target="_blank" class="news-link">Read more</a>
+                                    </div>
+                                </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </div>
+                </template>
+            </div>
+        </template>
+        <template if:true={error}>
+            <p class="error-message">{error}</p>
+        </template>
+    </lightning-card>
+</template>
