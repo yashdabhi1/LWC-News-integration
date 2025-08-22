@@ -1,0 +1,92 @@
+<template>
+    <lightning-card title="World Trade News" icon-name="utility:news">
+        <div class="filter-container slds-m-horizontal_xx-large slds-p-around_small">
+            <lightning-layout multiple-rows="true" class="slds-p-around_medium">
+                <lightning-layout-item size="1">
+                    <div class="custom-box1">
+                        <lightning-combobox
+                            name="category"
+                            label="Select Category"
+                            value={category}
+                            placeholder="Select Category"
+                            options={categoryOptions}
+                            onchange={handleCategoryChange}>
+                        </lightning-combobox>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="11" medium-device-size="11" small-device-size="11" large-device-size="11">
+                    <div class="custom-box2">
+                        <lightning-combobox
+                            name="country"
+                            label="Country"
+                            placeholder="Select Country"
+                            value={country}
+                            options={countryOptions}
+                            onchange={handleCountryChange}>
+                        </lightning-combobox>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading news..." size="medium" class="slds-align_absolute-center"></lightning-spinner>
+        </template>
+        <template if:true={paginatedNews}>
+            <div class="news-container slds-m-horizontal_xx-large slds-p-around_small">
+                <template for:each={paginatedNews} for:item="article">
+                    <div key={article.url} class="news-item slds-m-around_small">
+                        <lightning-layout multiple-rows="true">
+                            <lightning-layout-item size="1">
+                                <div class="image slds-p-right_small">
+                                    <template if:true={article.imageUrl}>
+                                        <img src={article.imageUrl} alt="News Image" class="news-image" />
+                                    </template>
+                                    <template if:false={article.imageUrl}>
+                                        <img src="/resource/defaultNewsImage" alt="Default News Image" class="news-image" />
+                                    </template>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="11">
+                                <div class="custom-box">
+                                    <div class="news-content">
+                                        <p class="news-source">News Source: {article.sourceName}</p>
+                                        <p class="news-title">{article.title}</p>
+                                        <p class="news-description">{article.description}</p>
+                                        <a href={article.url} target="_blank" class="news-link">Read more</a>
+                                    </div>
+                                </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </div>
+                </template>
+                <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-spread" style="padding-top: 0.5em;">
+                    <lightning-combobox
+                        name="pageSize"
+                        label="Records per page"
+                        value={pageSize}
+                        options={pageSizeOptions}
+                        onchange={handlePageSizeChange}
+                        class="slds-m-right_medium">
+                    </lightning-combobox>
+                    <div class="slds-align_absolute-center" style="height:5rem">
+                        <lightning-button disabled={disablePrevious} icon-name="utility:chevronleft" onclick={handlePrevious}></lightning-button>
+                        &nbsp;
+                        &nbsp;
+                        <span>Page {page} of {totalPages}</span>
+                        &nbsp;
+                        &nbsp;
+                        <lightning-button disabled={disableNext} icon-name="utility:chevronright" onclick={handleNext}></lightning-button>
+                    </div>
+                    <div class="slds-clearfix">
+                        <div class="slds-float_right">
+                            <span>Total Records: {totalRecords}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template if:true={error}>
+            <p class="error-message">{error}</p>
+        </template>
+    </lightning-card>
+</template>

@@ -1,0 +1,14 @@
+.slds-card {
+  min-height: 200px;
+}
+.news-image {
+    width: 80px;   
+    height: 50px;  
+    object-fit: cover;
+    border-radius: 6px;
+    margin: 0.5rem 0;
+}
+.newsimage{
+    height: 250px;
+    width: 460px;
+}
