@@ -24,33 +24,9 @@ To use this component, you need the following:
 - NewsAPI endpoint added to your Salesforce org's **Remote Site Settings** to allow secure API calls.
 - A custom setting named `NewsAPI__c` with fields `API_KEY__c` and `BASE_URL__c` configured in your Salesforce org.
 
-## Installation
+## Screenshots
+<img width="1889" height="728" alt="NI" src="https://github.com/user-attachments/assets/392963dc-03fe-4bcd-bdcc-da880b0bbe91" />
 
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/yashdabhi1/LWC-News-integration.git
-   ```
-
-2. **Obtain an API Key**:
-   - Sign up at [NewsAPI](https://newsapi.org/) to get your free API key.
-   - Store the API key securely in your Salesforce environment (e.g., as a custom setting or named credential).
-
-3. **Configure Remote Site Settings**:
-   - In your Salesforce org, navigate to **Setup > Security > Remote Site Settings**.
-   - Add the NewsAPI endpoint (e.g., `https://newsapi.org`) to allow API access.
-
-4. **Configure Custom Settings**:
-   - Create a custom setting `NewsAPI__c` in your Salesforce org.
-   - Add a record named 'Production' with fields `API_KEY__c` (your NewsAPI key) and `BASE_URL__c` (e.g., `https://newsapi.org/v2/top-headlines`).
-
-5. **Deploy the Component**:
-   - Deploy the LWC and Apex classes to your Salesforce org using the Salesforce CLI or a metadata deployment tool.
-   ```bash
-   sfdx force:source:deploy -p force-app/main/default
-   ```
-
-6. **Integrate into Your Salesforce App**:
-   - Add the LWC to a Lightning page or app using the Lightning App Builder.
 
 ## Usage
 
